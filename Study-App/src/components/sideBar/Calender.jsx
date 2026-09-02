@@ -38,15 +38,11 @@ const Calendar = ({ darkMode, onClose }) => {
   const totalDays = new Date(year, month + 1, 0).getDate()
 
   const previousMonth = () => {
-    setCurrentDate(
-      new Date(year, month - 1, 1)
-    )
+    setCurrentDate(new Date(year, month - 1, 1))
   }
 
   const nextMonth = () => {
-    setCurrentDate(
-      new Date(year, month + 1, 1)
-    )
+    setCurrentDate(new Date(year, month + 1, 1))
   }
 
   const today = new Date()
@@ -69,26 +65,40 @@ const Calendar = ({ darkMode, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-40 flex items-center justify-center p-4 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${
         darkMode
-          ? 'bg-black/40'
-          : 'bg-black/20'
+          ? 'bg-black/50'
+          : 'bg-black/30'
       }`}
-      onClick={onClose}
     >
 
       <div
-        className={`w-full max-w-md rounded-2xl p-5 shadow-xl ${
+        className={`w-full max-w-md rounded-2xl p-5 shadow-2xl ${
           darkMode
             ? 'bg-slate-800 text-white'
             : 'bg-white text-[#0F172A]'
         }`}
-        onClick={(e) => {
-          e.stopPropagation()
-        }}
       >
 
         {/* Header */}
+
+        <div className='flex items-center justify-between mb-5'>
+
+          <h1 className='text-xl font-bold'>
+            Calendar
+          </h1>
+
+          <button
+            onClick={onClose}
+            className='p-2 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700'
+          >
+            <X size={20} />
+          </button>
+
+        </div>
+
+
+        {/* Month Navigation */}
 
         <div className='flex items-center justify-between mb-5'>
 
@@ -99,27 +109,16 @@ const Calendar = ({ darkMode, onClose }) => {
             <ChevronLeft size={22} />
           </button>
 
-          <h1 className='text-xl font-bold'>
+          <h2 className='text-lg font-bold'>
             {monthNames[month]} {year}
-          </h1>
+          </h2>
 
-          <div className='flex items-center gap-1'>
-
-            <button
-              onClick={nextMonth}
-              className='p-2 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700'
-            >
-              <ChevronRight size={22} />
-            </button>
-
-            <button
-              onClick={onClose}
-              className='p-2 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700'
-            >
-              <X size={20} />
-            </button>
-
-          </div>
+          <button
+            onClick={nextMonth}
+            className='p-2 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700'
+          >
+            <ChevronRight size={22} />
+          </button>
 
         </div>
 
@@ -129,14 +128,12 @@ const Calendar = ({ darkMode, onClose }) => {
         <div className='grid grid-cols-7 gap-2 mb-2'>
 
           {dayNames.map((day) => (
-
             <div
               key={day}
               className='text-center text-sm font-bold'
             >
               {day}
             </div>
-
           ))}
 
         </div>
@@ -147,9 +144,7 @@ const Calendar = ({ darkMode, onClose }) => {
         <div className='grid grid-cols-7 gap-2'>
 
           {Array.from({ length: firstDay }).map((_, index) => (
-
             <div key={`empty-${index}`}></div>
-
           ))}
 
 

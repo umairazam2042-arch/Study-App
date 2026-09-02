@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Calendar from './Calendar'
+import Calender from './Calender'
 
 const UserChall = ({ darkMode }) => {
 
@@ -81,7 +81,7 @@ const UserChall = ({ darkMode }) => {
       {/* Calendar Modal */}
 
       {showCalendar && (
-        <Calendar
+        <Calender
           darkMode={darkMode}
           onClose={() => {
             setShowCalendar(false)
