@@ -55,9 +55,8 @@ const UserChall = ({ darkMode }) => {
 
 
         {/* Calendar */}
-
         <div
-          className='flex items-center mt-5'
+          className=' items-center mt-5'
           onClick={() => {
             setShowCalendar(true)
           }}
