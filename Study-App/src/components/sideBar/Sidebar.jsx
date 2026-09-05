@@ -1,7 +1,7 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import UserChall from './UserChall'
-import Help from './Help'
+import UserChall from './UserChallenge/UserChall'
+import Help from './Help/Help'
 import Profile from './Profile'
 
 const Sidebar = ({

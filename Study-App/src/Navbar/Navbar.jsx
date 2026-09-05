@@ -1,5 +1,10 @@
 import React from 'react'
 import { Menu, X } from 'lucide-react'
+import DashNav from './DashNav'
+import GoalsNav from './GoalNav'
+import TaskNav from './TaskNav'
+import NotesNav from './NotesNav'
+import SettingNav from './SettingNav'
 
 const Navbar = ({
   sidebarOpen,
@@ -40,11 +45,11 @@ const Navbar = ({
 
       <div className='hidden md:flex text-lg font-medium text-[#F8FAFC] w-[60%] h-full items-center justify-around px-3'>
 
-        <h1 className='hover:text-[#38BDF8]'>Dashboard</h1>
-        <h1 className='hover:text-[#38BDF8]'>Task</h1>
-        <h1 className='hover:text-[#38BDF8]'>Notes</h1>
-        <h1 className='hover:text-[#38BDF8]'>Goals</h1>
-        <h1 className='hover:text-[#38BDF8]'>Setting</h1>
+       <DashNav />
+       <GoalsNav />
+       <TaskNav />
+       <NotesNav />
+      <SettingNav />
 
       </div>
 

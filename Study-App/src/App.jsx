@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from './components/Navbar'
+import Navbar from './Navbar/Navbar.jsx'
 import Sidebar from './components/sideBar/Sidebar'
 import Contant from './components/MainContant/Contant'
+import { Routes , Route  } from 'react-router-dom'
+import TodayTask from './components/MainContant/TodayTask'
+import RecentTask from './components/MainContant/RecentTask'
+import Goal from './components/sideBar/UserChallenge/Goal'
+import Setting from './components/sideBar/Help/Setting'
+import Calender from './components/sideBar/UserChallenge/Calender.jsx'
+
 
 const App = () => {
 
@@ -64,14 +71,88 @@ const App = () => {
           setSidebarOpen={setSidebarOpen}
         />
 
-        <Contant
-          tasks={tasks}
-          setTasks={setTasks}
-          notes={notes}
-          setNotes={setNotes}
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
-        />
+        <Routes>
+          <Route 
+          path='/'
+          element={
+            <Contant
+              tasks={tasks}
+              setTasks={setTasks}
+              notes={notes}
+              setNotes={setNotes}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+          }
+          />
+
+          <Route
+  path='/tasks'
+  element={
+    <TodayTask
+      tasks={tasks}
+      setTasks={setTasks}
+      darkMode={darkMode}
+    />
+  }
+/>
+
+<Route
+  path='/notes'
+  element={
+    <RecentTask
+      notes={notes}
+      setNotes={setNotes}
+      darkMode={darkMode}
+    />
+  }
+/>
+
+<Route
+  path='/goals'
+  element={
+    <Goal
+      darkMode={darkMode}
+    />
+  }
+/>
+
+<Route
+  path='/setting'
+  element={
+    <Setting
+      tasks={tasks}
+      setTasks={setTasks}
+      notes={notes}
+      setNotes={setNotes}
+      darkMode={darkMode}
+      setDarkMode={setDarkMode}
+    />
+  }
+/>
+
+
+<Route
+  path='/recent'
+  element={
+    <RecentTask
+      notes={notes}
+      setNotes={setNotes}
+      darkMode={darkMode}
+    />
+  }
+/>
+
+<Route
+  path='/calendar'
+  element={
+    <Calender />
+  }
+/>
+                 
+        </Routes>
+
+         
 
       </div>
 

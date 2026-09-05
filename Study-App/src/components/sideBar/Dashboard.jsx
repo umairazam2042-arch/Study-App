@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Dashboard = ({ darkMode }) => {
   return (
@@ -13,9 +14,11 @@ const Dashboard = ({ darkMode }) => {
         className='h-15 w-15 p-2 object-cover'
       />
 
-      <h1 className='hover:text-[#38BDF8]'>
-        Dashboard
-      </h1>
+     <Link to="/"
+     className=' hover:text-[#38BDF8] cursor-pointer'>
+     Dashboard
+     </Link>
+
     </div>
   )
 }
