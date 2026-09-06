@@ -141,8 +141,8 @@ const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
       <div
         className={`p-3 sm:p-4 flex flex-col gap-2 rounded-2xl border transition-all ${
           isFullPage 
-            ? 'min-h-[140px] h-auto overflow-visible' 
-            : 'min-h-[140px] max-h-80 overflow-y-auto scrollbar-none'
+            ? 'min-h-35 h-auto overflow-visible' 
+            : 'min-h-35 max-h-80 overflow-y-auto scrollbar-none'
         } ${
           darkMode
             ? 'bg-slate-800/40 border-slate-700/60'
@@ -281,7 +281,7 @@ const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
                 ) : (
 
                   <h1
-                    className={`flex-1 break-words text-sm sm:text-base font-medium transition-all ${
+                    className={`flex-1 wrap-break-words text-sm sm:text-base font-medium transition-all ${
                       elem.completion
                         ? 'line-through text-gray-400 opacity-60'
                         : darkMode
