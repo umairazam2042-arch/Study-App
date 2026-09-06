@@ -183,35 +183,43 @@ const GoalPage = ({ darkMode }) => {
                 <div className='mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/50'>
                   <div className='flex justify-between text-xs font-semibold mb-1.5'>
                     <span className={darkMode ? 'text-slate-400' : 'text-slate-500'}>Progress</span>
-                    <span className='text-sky-500'>{item.progress}%</span>
+                    <span className={item.progress === 100 ? 'text-emerald-500' : 'text-sky-500'}>
+                      {item.progress}%
+                    </span>
                   </div>
 
-                  <input
-                    type='range'
-                    min='0'
-                    max='100'
-                    step='5'
-                    value={item.progress}
-                    onChange={(e) => {
-                      const newProgress = Number(e.target.value)
-                      setGoals(
-                        goals.map((goalItem) => {
-                          if (goalItem.id === item.id) {
-                            return {
-                              ...goalItem,
-                              progress: newProgress
+                  {/* Range slider 100% hone par hide ho jaye ga */}
+                  {item.progress < 100 && (
+                    <input
+                      type='range'
+                      min='0'
+                      max='100'
+                      step='5'
+                      value={item.progress}
+                      onChange={(e) => {
+                        const newProgress = Number(e.target.value)
+                        setGoals(
+                          goals.map((goalItem) => {
+                            if (goalItem.id === item.id) {
+                              return {
+                                ...goalItem,
+                                progress: newProgress
+                              }
                             }
-                          }
-                          return goalItem
-                        })
-                      )
-                    }}
-                    className='w-full accent-sky-500 cursor-pointer h-1.5 bg-slate-200 rounded-lg appearance-none dark:bg-slate-700'
-                  />
+                            return goalItem
+                          })
+                        )
+                      }}
+                      className='w-full accent-sky-500 cursor-pointer h-1.5 bg-slate-200 rounded-lg appearance-none dark:bg-slate-700 mb-2'
+                    />
+                  )}
 
-                  <div className='w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mt-2'>
+                  {/* Progress Visual Bar */}
+                  <div className='w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mt-1'>
                     <div
-                      className='h-full bg-sky-400 rounded-full transition-all duration-300'
+                      className={`h-full rounded-full transition-all duration-300 ${
+                        item.progress === 100 ? 'bg-emerald-500' : 'bg-sky-400'
+                      }`}
                       style={{
                         width: `${item.progress}%`
                       }}
