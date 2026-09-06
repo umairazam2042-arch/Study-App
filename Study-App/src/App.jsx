@@ -6,9 +6,9 @@ import { Routes , Route  } from 'react-router-dom'
 import TodayTask from './components/MainContant/TodayTask'
 import RecentTask from './components/MainContant/RecentTask'
 import Goal from './components/sideBar/UserChallenge/Goal'
-import Setting from './components/sideBar/Help/Setting'
-import Calender from './components/sideBar/UserChallenge/Calender.jsx'
+import SettingPAge from './components/MainContant/SettingPAge'
 import GoalPage from './components/MainContant/GoalPage'
+import CalenderPage from './components/MainContant/CalenderPage'
 
 
 const App = () => {
@@ -123,9 +123,20 @@ const App = () => {
 />
 
 <Route
+  path='/calender'
+  element={
+    <CalenderPage
+      darkMode={darkMode}
+    />
+  }
+/>
+
+
+
+<Route
   path='/setting'
   element={
-    <Setting
+    <SettingPAge
       tasks={tasks}
       setTasks={setTasks}
       notes={notes}
@@ -137,23 +148,9 @@ const App = () => {
 />
 
 
-<Route
-  path='/recent'
-  element={
-    <RecentTask
-      notes={notes}
-      setNotes={setNotes}
-      darkMode={darkMode}
-    />
-  }
-/>
 
-<Route
-  path='/calendar'
-  element={
-    <Calender />
-  }
-/>
+
+
                  
         </Routes>
        </div>

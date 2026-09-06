@@ -4,7 +4,7 @@ import React from 'react'
 const SettingNav = () => {
   return (
     <div>
-     <Link to="/settings" 
+     <Link to="/setting" 
      className='hover:text-[#38BDF8] cursor-pointer'>
      Setting
      </Link>

@@ -4,6 +4,8 @@ import YourTask from './YourTask'
 import TodayTask from './TodayTask'
 import RecentTask from './RecentTask'
 import GoalPage from './GoalPage'
+import CalenderPage from './CalenderPage'
+import SettingPAge from './SettingPAge'
 
 const Contant = ({
   tasks,
@@ -45,6 +47,19 @@ const Contant = ({
 
         <GoalPage
           darkMode={darkMode}
+        />
+
+        <CalenderPage 
+          darkMode={darkMode}
+        />
+
+        <SettingPAge 
+          tasks={tasks}
+          setTasks={setTasks}
+          notes={notes}
+          setNotes={setNotes}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
 
       </div>
