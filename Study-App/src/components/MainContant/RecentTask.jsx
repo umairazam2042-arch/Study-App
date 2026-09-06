@@ -29,7 +29,7 @@ const RecentTask = ({ notes, setNotes, darkMode }) => {
   }
 
   return (
-    <div className='mt-3 relative'>
+    <div className='p-3 sm:p-5 ml-0 sm:ml-5  relative'>
 
       <form
         className='flex flex-col sm:flex-row flex-wrap gap-2 mb-5'

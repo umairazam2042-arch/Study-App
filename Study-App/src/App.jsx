@@ -8,6 +8,7 @@ import RecentTask from './components/MainContant/RecentTask'
 import Goal from './components/sideBar/UserChallenge/Goal'
 import Setting from './components/sideBar/Help/Setting'
 import Calender from './components/sideBar/UserChallenge/Calender.jsx'
+import GoalPage from './components/MainContant/GoalPage'
 
 
 const App = () => {
@@ -57,8 +58,9 @@ const App = () => {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
+      {/* //this line changes for navbar screen size and sidebar open or close */}
 
-      <div className='flex min-h-[calc(100vh-5rem)] w-full'>
+      <div className='flex h-[calc(100vh-5rem)] w-full overflow-hidden shrink-0'>
 
         <Sidebar
           tasks={tasks}
@@ -71,7 +73,8 @@ const App = () => {
           setSidebarOpen={setSidebarOpen}
         />
 
-        <Routes>
+       <div className='flex-1 min-w-0 overflow-y-auto scrollbar-none'>
+         <Routes>
           <Route 
           path='/'
           element={
@@ -111,7 +114,7 @@ const App = () => {
 <Route
   path='/goals'
   element={
-    <Goal
+    <GoalPage
       darkMode={darkMode}
     />
   }
@@ -151,6 +154,7 @@ const App = () => {
 />
                  
         </Routes>
+       </div>
 
          
 
