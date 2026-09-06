@@ -5,25 +5,53 @@ const GoalPage = ({ darkMode }) => {
   const [goal, setGoal] = useState('')
   const [description, setDescription] = useState('')
   const [deadline, setDeadline] = useState('')
+  const [deadlineTime, setDeadlineTime] = useState('') // Time State
 
-  // Feature #9: LocalStorage se initial goals load karna
+  // LocalStorage se initial goals load karna
   const [goals, setGoals] = useState(() => {
     const savedGoals = localStorage.getItem('my_goals_data')
     return savedGoals ? JSON.parse(savedGoals) : []
   })
 
-  // Feature #9: LocalStorage mein save karna
+  // LocalStorage mein save karna
   useEffect(() => {
     localStorage.setItem('my_goals_data', JSON.stringify(goals))
+  }, [goals])
+
+  // Automatic Auto-Delete Feature (Date + Time Comparison)
+  useEffect(() => {
+    const checkExpiredGoals = () => {
+      const now = new Date()
+
+      const activeGoals = goals.filter((item) => {
+        if (!item.deadline) return true
+
+        // Goal ki date aur time ko combined Date Object mein convert karna
+        const goalTimeStr = item.deadlineTime ? item.deadlineTime : '23:59'
+        const goalDateTime = new Date(`${item.deadline}T${goalTimeStr}:00`)
+
+        // Agar Goal ka Time abhi se bada hai to rakho, warna delete kar do
+        return goalDateTime > now
+      })
+
+      if (activeGoals.length !== goals.length) {
+        setGoals(activeGoals)
+      }
+    }
+
+    // Pehle foran check karein
+    checkExpiredGoals()
+
+    // Har 10 second baad check karte rahein
+    const interval = setInterval(checkExpiredGoals, 10000)
+
+    return () => clearInterval(interval)
   }, [goals])
 
   const submitHandler = (e) => {
     e.preventDefault()
 
-    if (
-      goal.trim() === '' ||
-      description.trim() === ''
-    ) {
+    if (goal.trim() === '' || description.trim() === '') {
       return
     }
 
@@ -35,15 +63,17 @@ const GoalPage = ({ darkMode }) => {
         description: description,
         progress: 0,
         deadline: deadline,
+        deadlineTime: deadlineTime, // Saved Time
       }
     ])
 
     setGoal('')
     setDescription('')
     setDeadline('')
+    setDeadlineTime('')
   }
 
-  // Feature #8: Delete Goal
+  // Delete Goal Handler
   const deleteGoalHandler = (id) => {
     setGoals(goals.filter((item) => item.id !== id))
   }
@@ -51,9 +81,7 @@ const GoalPage = ({ darkMode }) => {
   return (
     <div
       className={`w-full min-h-[calc(100vh-5rem)] p-4 sm:p-8 transition-colors duration-300 ${
-        darkMode
-          ? 'bg-slate-900 text-white'
-          : 'bg-[#F8FAFC] text-[#0F172A]'
+        darkMode ? 'bg-slate-900 text-white' : 'bg-[#F8FAFC] text-[#0F172A]'
       }`}
     >
       <div className='max-w-7xl mx-auto'>
@@ -80,7 +108,7 @@ const GoalPage = ({ darkMode }) => {
         >
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center'>
             {/* Goal Input */}
-            <div className='lg:col-span-4'>
+            <div className='lg:col-span-3'>
               <input
                 type='text'
                 placeholder='Goal Title...'
@@ -95,7 +123,7 @@ const GoalPage = ({ darkMode }) => {
             </div>
 
             {/* Description Input */}
-            <div className='lg:col-span-4'>
+            <div className='lg:col-span-3'>
               <input
                 type='text'
                 placeholder='Short Description...'
@@ -109,12 +137,26 @@ const GoalPage = ({ darkMode }) => {
               />
             </div>
 
-            {/* Deadline Input */}
+            {/* Deadline Date Input */}
             <div className='lg:col-span-2'>
               <input
                 type='date'
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
+                className={`w-full border rounded-xl px-3 py-2.5 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
+                  darkMode
+                    ? 'bg-slate-900 border-slate-700 text-white'
+                    : 'bg-slate-50 border-gray-300 text-black'
+                }`}
+              />
+            </div>
+
+            {/* Deadline Time Input */}
+            <div className='lg:col-span-2'>
+              <input
+                type='time'
+                value={deadlineTime}
+                onChange={(e) => setDeadlineTime(e.target.value)}
                 className={`w-full border rounded-xl px-3 py-2.5 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
                   darkMode
                     ? 'bg-slate-900 border-slate-700 text-white'
@@ -163,11 +205,11 @@ const GoalPage = ({ darkMode }) => {
                   <h2 className='text-lg font-bold break-words leading-tight flex-1'>
                     {item.title}
                   </h2>
-                  {item.deadline && (
+                  {(item.deadline || item.deadlineTime) && (
                     <span className={`text-[11px] font-semibold px-2.5 py-1 rounded-md shrink-0 ${
                       darkMode ? 'bg-slate-700 text-slate-300' : 'bg-slate-100 text-slate-600'
                     }`}>
-                      📅 {item.deadline}
+                      📅 {item.deadline} {item.deadlineTime && `⏰ ${item.deadlineTime}`}
                     </span>
                   )}
                 </div>
@@ -188,7 +230,6 @@ const GoalPage = ({ darkMode }) => {
                     </span>
                   </div>
 
-                  {/* Range slider 100% hone par hide ho jaye ga */}
                   {item.progress < 100 && (
                     <input
                       type='range'
@@ -214,7 +255,6 @@ const GoalPage = ({ darkMode }) => {
                     />
                   )}
 
-                  {/* Progress Visual Bar */}
                   <div className='w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mt-1'>
                     <div
                       className={`h-full rounded-full transition-all duration-300 ${
