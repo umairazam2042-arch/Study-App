@@ -25,27 +25,33 @@ const Welcome = ({ darkMode }) => {
   }
 
   return (
-    <div className='text-lg font-medium'>
+    <div className='w-full transition-all duration-300'>
 
-      <h1
-        className={`text-2xl font-bold ml-10 ${
-          darkMode
-            ? 'text-white'
-            : 'text-[#0F172A]'
-        }`}
-      >
-        {greeting} {emoji}
-      </h1>
+      <div className={`p-5 sm:p-6 rounded-2xl border shadow-sm transition-all ${
+        darkMode 
+          ? 'bg-slate-800/60 border-slate-700/80' 
+          : 'bg-white border-slate-200'
+      }`}>
+        <h1
+          className={`text-2xl sm:text-3xl font-extrabold flex items-center gap-2 ${
+            darkMode
+              ? 'text-white'
+              : 'text-[#0F172A]'
+          }`}
+        >
+          <span>{greeting}</span> <span>{emoji}</span>
+        </h1>
 
-      <h1
-        className={`text-xl font-semibold mt-4 ml-20 ${
-          darkMode
-            ? 'text-gray-200'
-            : 'text-[#64748B]'
-        }`}
-      >
-        Ready to make today productive?
-      </h1>
+        <p
+          className={`text-base sm:text-lg font-medium mt-1.5 ${
+            darkMode
+              ? 'text-slate-300'
+              : 'text-[#64748B]'
+          }`}
+        >
+          Ready to make today productive?
+        </p>
+      </div>
 
     </div>
   )

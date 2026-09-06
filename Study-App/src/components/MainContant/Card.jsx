@@ -1,29 +1,29 @@
 import React from 'react'
 import { Trash2 } from 'lucide-react'
 
-const Card = ({ notes, setNotes, darkMode }) => {
+const Card = ({ notes, setNotes, darkMode, isFullPage = false }) => {
 
   return (
-    <div>
+    <div className='w-full transition-all duration-300'>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 mt-6 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
 
         {notes.length === 0 ? (
 
           <div
-            className={`col-span-full text-center py-6 ${
+            className={`col-span-full text-center py-12 px-4 rounded-2xl border-2 border-dashed ${
               darkMode
-                ? 'text-gray-300'
-                : 'text-gray-500'
+                ? 'border-slate-800 text-slate-500'
+                : 'border-slate-200 text-slate-400'
             }`}
           >
 
-            <h2 className='text-lg font-semibold'>
+            <h2 className='text-base font-semibold'>
               No notes found
             </h2>
 
-            <p className='text-sm'>
-              Create your first note
+            <p className='text-xs mt-1 opacity-75'>
+              Create your first note to see it here
             </p>
 
           </div>
@@ -36,40 +36,49 @@ const Card = ({ notes, setNotes, darkMode }) => {
 
               <div
                 key={elem.id}
-                className={`min-h-40 max-h-40 w-full rounded-2xl relative px-4 py-2 text-wrap overflow-auto flex flex-col scrollbar-none wrap-break-words leading-6 border-2 ${
+                className={`w-full rounded-2xl p-4 sm:p-5 flex flex-col justify-between border shadow-sm hover:shadow-md transition duration-200 ${
+                  isFullPage 
+                    ? 'min-h-44 h-auto overflow-visible' 
+                    : 'min-h-44 max-h-44 overflow-y-auto scrollbar-none'
+                } ${
                   darkMode
-                    ? 'bg-slate-800 border-slate-600 text-white'
-                    : 'bg-[#FFFFFF] border-sky-400 text-[#0F172A]'
+                    ? 'bg-slate-800/90 border-slate-700 text-white'
+                    : 'bg-white border-slate-200 text-[#0F172A]'
                 }`}
               >
 
-                <div className='flex items-center justify-between mb-2'>
+                <div>
+                  <div className='flex items-start justify-between gap-3 mb-2'>
 
-                  <h2 className='text-xl text-wrap font-bold wrap-break-words'>
-                    {elem.title}
-                  </h2>
+                    <h2 className='text-base font-bold break-words leading-snug flex-1'>
+                      {elem.title}
+                    </h2>
 
-                  <Trash2
-                    size={20}
-                    color='#df0707'
-                    className='cursor-pointer ml-4 shrink-0'
-                    onClick={() => {
+                    <button
+                      className='p-1 text-rose-500 hover:bg-rose-500/10 rounded-lg cursor-pointer shrink-0 transition'
+                      onClick={() => {
 
-                      setNotes(
-                        notes.filter(
-                          (note) => note.id !== elem.id
+                        setNotes(
+                          notes.filter(
+                            (note) => note.id !== elem.id
+                          )
                         )
-                      )
 
-                    }}
-                  />
+                      }}
+                    >
+                      <Trash2
+                        size={18}
+                      />
+                    </button>
 
+                  </div>
+
+                  <p className={`text-sm break-words leading-relaxed ${
+                    darkMode ? 'text-slate-300' : 'text-slate-600'
+                  }`}>
+                    {elem.description}
+                  </p>
                 </div>
-
-
-                <h3 className='mt-5 text-wrap font-medium wrap-break-words'>
-                  {elem.description}
-                </h3>
 
               </div>
 

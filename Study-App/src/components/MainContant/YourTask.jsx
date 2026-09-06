@@ -11,54 +11,52 @@ const YourTask = ({ tasks, darkMode }) => {
   )
 
   const cardStyle = darkMode
-    ? 'bg-slate-800 border-slate-600 text-white'
-    : 'bg-[#FFFFFF] border-sky-400 text-[#0F172A]'
+    ? 'bg-slate-800/80 border-slate-700 text-white shadow-sm'
+    : 'bg-white border-slate-200 text-[#0F172A] shadow-sm'
 
   return (
-    <div className='p-2'>
+    <div className='w-full transition-all duration-300'>
 
-      <div className='min-h-50 w-full flex flex-wrap justify-center sm:justify-around gap-4 p-3 sm:p-5'>
+      {/* Grid container for stats cards */}
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 w-full'>
 
         {/* Total Tasks */}
-
         <div
-          className={`min-h-35 sm:min-h-full w-full sm:w-50 rounded-2xl text-2xl font-medium p-5 border-2 ${cardStyle}`}
+          className={`rounded-2xl p-5 border flex flex-col items-center justify-center transition-all duration-200 hover:shadow-md ${cardStyle}`}
         >
-          <h1 className='text-xl text-center font-bold'>
+          <h1 className='text-sm sm:text-base text-center font-semibold text-sky-500 uppercase tracking-wide'>
             Total Tasks
           </h1>
 
-          <h1 className='text-4xl text-center font-bold mt-5'>
+          <h1 className='text-3xl sm:text-4xl text-center font-extrabold mt-2'>
             {tasks.length}
           </h1>
         </div>
 
 
         {/* Complete Tasks */}
-
         <div
-          className={`min-h-35 sm:min-h-full w-full sm:w-50 rounded-2xl p-5 border-2 ${cardStyle}`}
+          className={`rounded-2xl p-5 border flex flex-col items-center justify-center transition-all duration-200 hover:shadow-md ${cardStyle}`}
         >
-          <h1 className='text-xl text-center font-bold'>
+          <h1 className='text-sm sm:text-base text-center font-semibold text-emerald-500 uppercase tracking-wide'>
             Complete Tasks
           </h1>
 
-          <h1 className='text-4xl text-center font-bold mt-5'>
+          <h1 className='text-3xl sm:text-4xl text-center font-extrabold mt-2 text-emerald-500'>
             {completeTask.length}
           </h1>
         </div>
 
 
         {/* Pending Tasks */}
-
         <div
-          className={`min-h-35 sm:min-h-full w-full sm:w-50 rounded-2xl p-5 border-2 ${cardStyle}`}
+          className={`rounded-2xl p-5 border flex flex-col items-center justify-center transition-all duration-200 hover:shadow-md ${cardStyle}`}
         >
-          <h1 className='text-xl text-center font-bold'>
+          <h1 className='text-sm sm:text-base text-center font-semibold text-amber-500 uppercase tracking-wide'>
             Pending Tasks
           </h1>
 
-          <h1 className='text-4xl text-center font-bold mt-5'>
+          <h1 className='text-3xl sm:text-4xl text-center font-extrabold mt-2 text-amber-500'>
             {pendingTask.length}
           </h1>
         </div>

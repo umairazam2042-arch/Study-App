@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Trash2, Pencil, Check } from 'lucide-react'
 
-const TodayTask = ({ tasks, setTasks, darkMode }) => {
+const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
 
   const [NewTask, setNewTask] = useState('')
   const [editingId, setEditingId] = useState(null)
@@ -41,25 +41,41 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
   })
 
   return (
-    <div className='p-3 sm:p-5 ml-0 sm:ml-5 min-h-50'>
+    <div className='w-full transition-all duration-300'>
 
-      {/* Add Task */}
-      <div className='mb-4 p-1 sm:p-2'>
+      {/* Title */}
+      <h1
+        className={`text-2xl font-bold mb-4 flex items-center gap-2 ${
+          darkMode
+            ? 'text-white'
+            : 'text-[#0F172A]'
+        }`}
+      >
+        📋 Today's Tasks
+      </h1>
 
+      {/* Top Form & Controls Box */}
+      <div className={`p-4 sm:p-5 rounded-2xl border mb-6 transition-all shadow-sm ${
+        darkMode
+          ? 'bg-slate-800/80 border-slate-700'
+          : 'bg-white border-slate-200'
+      }`}>
+
+        {/* Add Task Form */}
         <form
           onSubmit={(e) => {
             submitHandiler(e)
           }}
-          className='flex flex-col sm:flex-row items-stretch sm:items-center gap-2'
+          className='flex flex-col sm:flex-row gap-2'
         >
 
           <input
             type="text"
             placeholder='Enter a new task...'
-            className={`w-full sm:w-auto flex-1 sm:flex-none border-2 border-gray-300 rounded-lg px-3 py-2 outline-none ${
+            className={`w-full flex-1 border rounded-xl px-3.5 py-2.5 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
               darkMode
-                ? 'bg-slate-800 text-white placeholder:text-gray-400'
-                : 'bg-white text-black'
+                ? 'bg-slate-900 border-slate-700 text-white placeholder:text-gray-400'
+                : 'bg-slate-50 border-gray-300 text-black placeholder:text-gray-400'
             }`}
             value={NewTask}
             onChange={(ele) => {
@@ -68,7 +84,7 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
           />
 
           <button
-            className='w-full sm:w-auto border-none cursor-pointer text-[#F8FAFC] py-2 text-base sm:text-lg font-semibold bg-[#1E293B] rounded px-3 outline-none'
+            className='w-full sm:w-auto bg-[#1E293B] hover:bg-sky-600 active:scale-[0.98] text-white px-5 py-2.5 text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer'
           >
             Add Task
           </button>
@@ -77,7 +93,7 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
 
 
         {/* Search + Filter */}
-        <div className='flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mt-3'>
+        <div className='flex flex-col sm:flex-row gap-2 mt-3'>
 
           <input
             type="text"
@@ -86,10 +102,10 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
             onChange={(e) => {
               setSearchTask(e.target.value)
             }}
-            className={`w-full sm:flex-1 border-2 border-gray-300 rounded-lg px-3 py-2 outline-none ${
+            className={`w-full sm:flex-1 border rounded-xl px-3.5 py-2 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
               darkMode
-                ? 'bg-slate-800 text-white placeholder:text-gray-400'
-                : 'bg-white text-black'
+                ? 'bg-slate-900 border-slate-700 text-white placeholder:text-gray-400'
+                : 'bg-slate-50 border-gray-300 text-black placeholder:text-gray-400'
             }`}
           />
 
@@ -98,10 +114,10 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
             onChange={(e) => {
               setFilter(e.target.value)
             }}
-            className={`w-full sm:w-auto py-2 px-2 border-2 border-gray-300 rounded-lg text-sm font-medium outline-none ${
+            className={`w-full sm:w-auto py-2 px-3 border rounded-xl text-sm font-medium outline-none transition focus:ring-2 focus:ring-sky-400 ${
               darkMode
-                ? 'bg-slate-800 text-white'
-                : 'bg-white text-black'
+                ? 'bg-slate-900 border-slate-700 text-white'
+                : 'bg-slate-50 border-gray-300 text-black'
             }`}
           >
             <option value="all">All Tasks</option>
@@ -114,49 +130,41 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
       </div>
 
 
-      {/* Heading */}
-      <h1
-        className={`text-xl sm:text-2xl font-semibold ${
-          darkMode
-            ? 'text-white'
-            : 'text-[#0F172A]'
-        }`}
-      >
-        Today's Tasks
-      </h1>
-
-
-      {/* Task List */}
+      {/* Task List Box: Conditional Height & Overflow */}
       <div
-        className={`px-3 sm:px-5 py-3 flex flex-col gap-2 min-h-20 max-h-72 mt-2 overflow-y-auto scrollbar-none rounded-lg ${
+        className={`p-3 sm:p-4 flex flex-col gap-2 rounded-2xl border transition-all ${
+          isFullPage 
+            ? 'min-h-[140px] h-auto overflow-visible' 
+            : 'min-h-[140px] max-h-80 overflow-y-auto scrollbar-none'
+        } ${
           darkMode
-            ? 'bg-slate-800'
-            : 'bg-amber-100'
+            ? 'bg-slate-800/40 border-slate-700/60'
+            : 'bg-amber-50/60 border-amber-200/60'
         }`}
       >
 
         {filteredTasks.length === 0 ? (
 
-          <div className='w-full flex flex-col items-center justify-center py-4 text-center'>
+          <div className='w-full flex flex-col items-center justify-center my-auto py-6 text-center'>
 
             <h2
-              className={`text-base sm:text-lg font-semibold ${
+              className={`text-base font-semibold ${
                 darkMode
                   ? 'text-gray-300'
-                  : 'text-gray-500'
+                  : 'text-gray-600'
               }`}
             >
               No tasks found
             </h2>
 
             <p
-              className={`text-sm ${
+              className={`text-xs mt-1 ${
                 darkMode
-                  ? 'text-gray-400'
+                  ? 'text-gray-500'
                   : 'text-gray-400'
               }`}
             >
-              Add a new task to get started
+              Add a new task above to get started
             </p>
 
           </div>
@@ -168,13 +176,17 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
             return (
 
               <div
-                className='w-full flex flex-wrap gap-2 items-center py-1'
+                className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all ${
+                  darkMode 
+                    ? 'bg-slate-800 border-slate-700/80' 
+                    : 'bg-white border-slate-200/80 shadow-2xs'
+                }`}
                 key={elem.id}
               >
 
                 <input
                   type='checkbox'
-                  className='outline-none cursor-pointer shrink-0'
+                  className='w-4 h-4 rounded accent-sky-500 cursor-pointer shrink-0'
                   checked={elem.completion}
                   onChange={() => {
 
@@ -202,15 +214,15 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
                     onSubmit={(f) => {
                       f.preventDefault()
                     }}
-                    className='max-w-full'
+                    className='flex-1 max-w-full'
                   >
 
-                    <div className='relative flex items-center border-2 border-gray-400 rounded max-w-full'>
+                    <div className='relative flex items-center gap-1 border border-sky-400 rounded-lg p-1 bg-slate-900/10'>
 
                       <input
                         type="text"
                         value={editTitle}
-                        className={`w-40 sm:w-60 rounded px-2 py-1 text-base sm:text-lg font-semibold outline-none ${
+                        className={`w-full rounded px-2 py-1 text-sm font-medium outline-none ${
                           darkMode
                             ? 'bg-slate-700 text-white'
                             : 'bg-white text-black'
@@ -222,7 +234,7 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
 
                       <button
                         type="button"
-                        className='cursor-pointer shrink-0'
+                        className='cursor-pointer shrink-0 p-1 text-emerald-500 hover:text-emerald-600 transition'
                         onClick={() => {
 
                           if (editTitle.trim() === '') {
@@ -249,9 +261,9 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
                         }}
                       >
                         <Check
-                          size={16}
-                          strokeWidth={4.75}
-                          className='mr-2 active:scale-95'
+                          size={18}
+                          strokeWidth={3}
+                          className='active:scale-95'
                         />
                       </button>
 
@@ -262,11 +274,11 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
                 ) : (
 
                   <h1
-                    className={`max-w-[65%] sm:max-w-[75%] break-words text-base sm:text-lg font-medium ${
+                    className={`flex-1 break-words text-sm sm:text-base font-medium transition-all ${
                       elem.completion
-                        ? 'underline text-gray-400'
+                        ? 'line-through text-gray-400 opacity-60'
                         : darkMode
-                          ? 'text-white'
+                          ? 'text-slate-100'
                           : 'text-[#0F172A]'
                     }`}
                   >
@@ -276,35 +288,35 @@ const TodayTask = ({ tasks, setTasks, darkMode }) => {
                 )}
 
 
-                {/* Edit */}
-                <button
-                  className='text-amber-500 cursor-pointer shrink-0 ml-auto'
-                  onClick={() => {
+                {/* Action Buttons */}
+                <div className='flex items-center gap-1 shrink-0 ml-auto'>
+                  <button
+                    className='p-1.5 text-amber-500 hover:bg-amber-500/10 rounded-lg cursor-pointer transition'
+                    onClick={() => {
 
-                    setEditingId(elem.id)
-                    setEditTitle(elem.title)
+                      setEditingId(elem.id)
+                      setEditTitle(elem.title)
 
-                  }}
-                >
-                  <Pencil size={19} />
-                </button>
+                    }}
+                  >
+                    <Pencil size={17} />
+                  </button>
 
+                  <button
+                    className='p-1.5 text-rose-500 hover:bg-rose-500/10 rounded-lg cursor-pointer transition'
+                    onClick={() => {
 
-                {/* Delete */}
-                <button
-                  className='text-red-500 cursor-pointer shrink-0'
-                  onClick={() => {
-
-                    setTasks(
-                      tasks.filter(
-                        (task) => task.id !== elem.id
+                      setTasks(
+                        tasks.filter(
+                          (task) => task.id !== elem.id
+                        )
                       )
-                    )
 
-                  }}
-                >
-                  <Trash2 size={19} />
-                </button>
+                    }}
+                  >
+                    <Trash2 size={17} />
+                  </button>
+                </div>
 
               </div>
             )

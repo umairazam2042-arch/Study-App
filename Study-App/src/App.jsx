@@ -96,6 +96,7 @@ const App = () => {
       tasks={tasks}
       setTasks={setTasks}
       darkMode={darkMode}
+      isFullPage={true}
     />
   }
 />
@@ -107,6 +108,7 @@ const App = () => {
       notes={notes}
       setNotes={setNotes}
       darkMode={darkMode}
+      isFullPage={true}
     />
   }
 />

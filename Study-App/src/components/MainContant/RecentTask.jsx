@@ -29,72 +29,86 @@ const RecentTask = ({ notes, setNotes, darkMode }) => {
   }
 
   return (
-    <div className='p-3 sm:p-5 ml-0 sm:ml-5  relative'>
+    <div className='w-full transition-all duration-300'>
 
-      <form
-        className='flex flex-col sm:flex-row flex-wrap gap-2 mb-5'
-        onSubmit={(e) => {
-          submitHandiler(e)
-        }}
-      >
-
-        <input
-          type='text'
-          placeholder='Enter note title...'
-          className={`w-full sm:w-auto border-2 border-gray-300 rounded-lg px-3 py-2 outline-none ${
-            darkMode
-              ? 'bg-slate-800 text-white placeholder:text-gray-400'
-              : 'bg-white text-black'
-          }`}
-          value={notetitle}
-          onChange={(ele) => {
-            setNotetitle(ele.target.value)
-          }}
-        />
-
-        <input
-          type='text'
-          placeholder='Enter note description...'
-          className={`w-full sm:w-auto border-2 border-gray-300 rounded-lg px-3 py-2 outline-none ${
-            darkMode
-              ? 'bg-slate-800 text-white placeholder:text-gray-400'
-              : 'bg-white text-black'
-          }`}
-          value={notedescrption}
-          onChange={(ele) => {
-            setNotedescrption(ele.target.value)
-          }}
-        />
-
-        <button
-          type='submit'
-          className='w-full sm:w-auto bg-[#1E293B] text-white px-4 py-2 rounded-lg font-semibold cursor-pointer'
-        >
-          Add Note
-        </button>
-
-      </form>
-
-
+      {/* Heading */}
       <h1
-        className={`text-2xl font-semibold ${
+        className={`text-2xl font-bold mb-4 flex items-center gap-2 ${
           darkMode
             ? 'text-white'
             : 'text-[#0F172A]'
         }`}
       >
-        Recent Notes
+        📝 Recent Notes
       </h1>
 
+      {/* Responsive Form Layout */}
+      <form
+        className={`p-4 sm:p-5 rounded-2xl border mb-6 transition-all shadow-sm ${
+          darkMode
+            ? 'bg-slate-800/80 border-slate-700'
+            : 'bg-white border-slate-200'
+        }`}
+        onSubmit={(e) => {
+          submitHandiler(e)
+        }}
+      >
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3 items-center'>
 
-      <div className='mt-2 max-h-100 overflow-y-auto scrollbar-none'>
+          {/* Title Input */}
+          <div className='lg:col-span-4'>
+            <input
+              type='text'
+              placeholder='Enter note title...'
+              className={`w-full border rounded-xl px-3.5 py-2.5 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-700 text-white placeholder:text-gray-400'
+                  : 'bg-slate-50 border-gray-300 text-black placeholder:text-gray-400'
+              }`}
+              value={notetitle}
+              onChange={(ele) => {
+                setNotetitle(ele.target.value)
+              }}
+            />
+          </div>
 
+          {/* Description Input */}
+          <div className='lg:col-span-6'>
+            <input
+              type='text'
+              placeholder='Enter note description...'
+              className={`w-full border rounded-xl px-3.5 py-2.5 outline-none text-sm transition focus:ring-2 focus:ring-sky-400 ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-700 text-white placeholder:text-gray-400'
+                  : 'bg-slate-50 border-gray-300 text-black placeholder:text-gray-400'
+              }`}
+              value={notedescrption}
+              onChange={(ele) => {
+                setNotedescrption(ele.target.value)
+              }}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className='lg:col-span-2 sm:col-span-2'>
+            <button
+              type='submit'
+              className='w-full bg-[#1E293B] hover:bg-sky-600 active:scale-[0.98] text-white py-2.5 rounded-xl font-semibold text-sm transition shadow-sm cursor-pointer'
+            >
+              Add Note
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+      {/* Notes Display Section */}
+      <div className='max-h-96 overflow-y-auto scrollbar-none rounded-xl'>
         <Card
           notes={notes}
           setNotes={setNotes}
           darkMode={darkMode}
         />
-
       </div>
 
     </div>
