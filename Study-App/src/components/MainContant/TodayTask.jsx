@@ -41,7 +41,14 @@ const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
   })
 
   return (
-    <div className='w-full transition-all duration-300'>
+    <div
+  className={`w-full min-h-[calc(100vh-5rem)] p-4 sm:p-8 transition-all duration-300 ${
+    darkMode
+      ? 'bg-slate-900 text-white'
+      : 'bg-[#F8FAFC] text-[#0F172A]'
+  }`}
+>
+  <div className='max-w-7xl mx-auto'>
 
       {/* Title */}
       <h1
@@ -201,7 +208,7 @@ const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
                         }
 
                         return task
-                      })
+                      })  
                     )
 
                   }}
@@ -324,6 +331,7 @@ const TodayTask = ({ tasks, setTasks, darkMode, isFullPage = false }) => {
 
         )}
 
+      </div>
       </div>
 
     </div>

@@ -1,3 +1,4 @@
+import { UserRoundPen } from 'lucide-react'
 import React from 'react'
 
 const Profile = ({ darkMode }) => {
@@ -10,11 +11,10 @@ const Profile = ({ darkMode }) => {
 
       <div className='flex items-center'>
 
-        <img
-          src="https://i.pinimg.com/736x/e7/08/d5/e708d550a4b9421c577ea3f01c9df5fa.jpg"
-          alt=""
-          className='h-10 rounded-full w-10 p-2 object-cover'
-        />
+         <UserRoundPen
+        size={22}
+        className='mr-2'
+      />
 
         <h1 className='hover:text-[#38BDF8] cursor-pointer'>
           My Profile

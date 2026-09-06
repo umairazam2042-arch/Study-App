@@ -29,7 +29,14 @@ const RecentTask = ({ notes, setNotes, darkMode }) => {
   }
 
   return (
-    <div className='w-full transition-all duration-300'>
+   <div
+  className={`w-full min-h-[calc(100vh-5rem)] p-4 sm:p-8 transition-all duration-300 ${
+    darkMode
+      ? 'bg-slate-900 text-white'
+      : 'bg-[#F8FAFC] text-[#0F172A]'
+  }`}
+>
+  <div className='max-w-7xl mx-auto'>
 
       {/* Heading */}
       <h1
@@ -110,7 +117,7 @@ const RecentTask = ({ notes, setNotes, darkMode }) => {
           darkMode={darkMode}
         />
       </div>
-
+      </div>
     </div>
   )
 }

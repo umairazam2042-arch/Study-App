@@ -9,6 +9,7 @@ import Goal from './components/sideBar/UserChallenge/Goal'
 import SettingPAge from './components/MainContant/SettingPAge'
 import GoalPage from './components/MainContant/GoalPage'
 import CalenderPage from './components/MainContant/CalenderPage'
+import ProgressPage from './components/MainContant/ProgressPage'
 
 
 const App = () => {
@@ -131,7 +132,15 @@ const App = () => {
   }
 />
 
-
+<Route
+  path='/progress'
+  element={
+    <ProgressPage
+      tasks={tasks}
+      darkMode={darkMode}
+    />
+  }
+/>
 
 <Route
   path='/setting'
