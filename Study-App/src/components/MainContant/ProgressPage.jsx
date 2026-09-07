@@ -90,7 +90,7 @@ const ProgressPage = ({ tasks = [], darkMode }) => {
         {/* Main Progress Card */}
 
         <div
-          className={`rounded-2xl border p-6 sm:p-8 mb-6 shadow-sm ${
+          className={`w-full min-h-0 p-4 sm:p-8 transition-colors duration-300 ${
             darkMode
               ? 'bg-slate-800 border-slate-700'
               : 'bg-white border-slate-200'
