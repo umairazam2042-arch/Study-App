@@ -55,6 +55,10 @@ const Contant = ({
           darkMode={darkMode}
         />
 
+<ProgressPage
+  tasks={tasks}
+  darkMode={darkMode}
+/>
         <SettingPage
           tasks={tasks}
           setTasks={setTasks}
@@ -64,10 +68,6 @@ const Contant = ({
           setDarkMode={setDarkMode}
         />
 
-        <ProgressPage
-          tasks={tasks}
-          darkMode={darkMode}
-        />
 
       </div>
 
