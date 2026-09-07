@@ -24,7 +24,7 @@ const SettingPage = ({
 
   return (
     <div
-      className={`w-full min-h-[calc(100vh-5rem)] p-4 sm:p-8 ${
+  className={`w-full min-h-0 p-4 sm:p-8 transition-colors duration-300 ${
         darkMode
           ? 'bg-slate-900 text-white'
           : 'bg-[#F8FAFC] text-[#0F172A]'

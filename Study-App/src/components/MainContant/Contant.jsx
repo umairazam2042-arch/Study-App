@@ -25,7 +25,8 @@ const Contant = ({
           : 'bg-[#F8FAFC] text-[#64748B]'
       }`}
     >
-      <div className='max-w-7xl mx-auto flex flex-col gap-6 sm:gap-8'>
+
+      <div className='max-w-7xl mx-auto flex flex-col gap-4'>
 
         <Welcome darkMode={darkMode} />
 
@@ -50,11 +51,11 @@ const Contant = ({
           darkMode={darkMode}
         />
 
-        <CalenderPage 
+        <CalenderPage
           darkMode={darkMode}
         />
 
-        <SettingPAge 
+        <SettingPAge
           tasks={tasks}
           setTasks={setTasks}
           notes={notes}
@@ -69,6 +70,7 @@ const Contant = ({
         />
 
       </div>
+
     </div>
   )
 }
